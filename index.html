@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agenda de Sueño del Bebé</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="branding">
+        <h1>Agenda de Sueño del Bebé</h1>
+        <p>Registra el descanso y la alimentación de tu bebé y visualiza su evolución.</p>
+      </div>
+    </header>
+    <main>
+      <section class="daily-panel">
+        <div class="panel-header">
+          <h2>Día a día</h2>
+          <label class="date-picker">
+            Selecciona el día
+            <input type="date" id="day-picker" />
+          </label>
+        </div>
+        <div class="timeline" aria-live="polite">
+          <div class="hours" id="hour-labels"></div>
+          <div class="segments" id="timeline"></div>
+        </div>
+        <div class="legend">
+          <span class="legend-item">
+            <span class="legend-swatch sleeping"></span> Dormido
+          </span>
+          <span class="legend-item">
+            <span class="legend-swatch marker-start"></span> Hora de dormir
+          </span>
+          <span class="legend-item">
+            <span class="legend-swatch marker-end"></span> Hora de despertar
+          </span>
+          <span class="legend-item">
+            <span class="legend-swatch marker-bottle"></span> Toma de biberón
+          </span>
+        </div>
+        <div class="forms">
+          <form id="sleep-form" class="card" autocomplete="off">
+            <h3>Registrar sueño</h3>
+            <div class="field">
+              <label for="sleep-start">Hora de dormir</label>
+              <input type="time" id="sleep-start" step="900" required />
+            </div>
+            <div class="field">
+              <label for="sleep-end">Hora de despertar</label>
+              <input type="time" id="sleep-end" step="900" required />
+            </div>
+            <button type="submit">Añadir descanso</button>
+            <p class="help">Los registros se guardan en tu navegador para que no los pierdas.</p>
+          </form>
+          <form id="bottle-form" class="card" autocomplete="off">
+            <h3>Registrar biberón</h3>
+            <div class="field">
+              <label for="bottle-time">Hora</label>
+              <input type="time" id="bottle-time" step="300" required />
+            </div>
+            <div class="field">
+              <label for="bottle-amount">Cantidad (ml)</label>
+              <input
+                type="number"
+                id="bottle-amount"
+                min="0"
+                step="10"
+                placeholder="Ej. 120"
+                required
+              />
+            </div>
+            <button type="submit">Añadir biberón</button>
+          </form>
+          <div class="summary card" id="daily-summary">
+            <h3>Resumen del día</h3>
+            <dl>
+              <div>
+                <dt>Horas de sueño</dt>
+                <dd id="summary-sleep">0 h</dd>
+              </div>
+              <div>
+                <dt>Cant. total biberón</dt>
+                <dd id="summary-bottle">0 ml</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+        <div class="event-lists">
+          <div class="card">
+            <h3>Siestas registradas</h3>
+            <ul id="sleep-list" class="event-list" aria-live="polite"></ul>
+          </div>
+          <div class="card">
+            <h3>Biberones</h3>
+            <ul id="bottle-list" class="event-list" aria-live="polite"></ul>
+          </div>
+        </div>
+      </section>
+      <section class="history-panel">
+        <div class="panel-header">
+          <h2>Histórico</h2>
+          <p>Selecciona un rango de fechas para comparar el descanso y la alimentación.</p>
+        </div>
+        <form id="history-form" class="history-form">
+          <div class="field">
+            <label for="history-start">Desde</label>
+            <input type="date" id="history-start" required />
+          </div>
+          <div class="field">
+            <label for="history-end">Hasta</label>
+            <input type="date" id="history-end" required />
+          </div>
+          <button type="submit">Generar gráfica</button>
+        </form>
+        <div class="history-results">
+          <canvas id="history-chart" height="220" role="img" aria-label="Gráfica del histórico"></canvas>
+          <div id="history-summary" class="history-summary" aria-live="polite"></div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <small>
+        Los datos se almacenan únicamente en tu navegador. Inspirado en la agenda de sueño utilizada en centros de salud pediátricos.
+      </small>
+    </footer>
+  </body>
+</html>

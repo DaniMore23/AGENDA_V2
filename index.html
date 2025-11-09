@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda de Sueño del Bebé</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="app-header">
+    <div class="container">
+      <h1>Agenda de Sueño del Bebé</h1>
+      <p>Registra los períodos de sueño y las tomas de biberón para comprender mejor los hábitos de tu bebé.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="planner">
+      <div class="controls">
+        <div class="date-picker">
+          <label for="date-select">Selecciona un día</label>
+          <input type="date" id="date-select">
+        </div>
+
+        <div class="form-card">
+          <h2>Sueño</h2>
+          <div class="form-row">
+            <label for="sleep-start">Hora de inicio</label>
+            <input type="time" id="sleep-start" step="300">
+          </div>
+          <div class="form-row">
+            <label for="sleep-end">Hora de despertar</label>
+            <input type="time" id="sleep-end" step="300">
+          </div>
+          <button id="add-sleep" class="primary-btn">Añadir sueño</button>
+          <ul id="sleep-list" class="entry-list"></ul>
+        </div>
+
+        <div class="form-card">
+          <h2>Biberones</h2>
+          <div class="form-row">
+            <label for="bottle-time">Hora</label>
+            <input type="time" id="bottle-time" step="300">
+          </div>
+          <div class="form-row">
+            <label for="bottle-amount">Cantidad (ml)</label>
+            <input type="number" id="bottle-amount" min="0" step="10" placeholder="120">
+          </div>
+          <button id="add-bottle" class="secondary-btn">Registrar biberón</button>
+          <ul id="bottle-list" class="entry-list"></ul>
+        </div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <h2>Registro diario</h2>
+          <p>Los bloques azules representan sueño. El icono de biberón indica una toma.</p>
+        </div>
+        <div class="timeline-table-wrapper">
+          <table id="timeline-table">
+            <thead>
+              <tr>
+                <th>Día</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="history">
+      <div class="history-card">
+        <h2>Histórico</h2>
+        <div class="history-controls">
+          <div>
+            <label for="history-start">Fecha de inicio</label>
+            <input type="date" id="history-start">
+          </div>
+          <div>
+            <label for="history-end">Fecha de fin</label>
+            <input type="date" id="history-end">
+          </div>
+          <button id="generate-history" class="primary-btn">Generar gráfica</button>
+        </div>
+        <canvas id="history-chart" height="220"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <template id="table-header-template">
+    <tr>
+      <th>Día</th>
+    </tr>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
